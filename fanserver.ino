@@ -6,9 +6,12 @@
 
 int LEDPIN = 11; // your LED PIN
 
-int LED2  =  3;
-int LED3  =  4;
-int LED4  =  5;
+int LED2    =  3;
+int LED3    =  4;
+int LED4    =  5;
+int tempPin =  1;
+float temp;
+
 YunServer server;
 
 
@@ -66,11 +69,11 @@ void process(YunClient client) {
   
   // Show UI
   client.println("<B><Center>");
-  client.println("<a href='http://192.168.1.13/arduino/1\\'>Turn ON LED</a><br>");
-  client.println("<a href='http://192.168.1.13/arduino/2\\'>Turn OFF LED</a><br>");
+  client.println("<a href='http://www.ericklan.com:8080/arduino/1\\'>Turn ON LED</a><br>");
+  client.println("<a href='http://www.ericklan.com:8080/arduino/2\\'>Turn OFF LED</a><br>");
 
-   client.println("<a href='http://192.168.1.13/arduino/3\\'>Turn ON TURBO</a><br>");
-  client.println("<a href='http://192.168.1.13/arduino/4\\'>Turn OFF TURBO</a><br>");
+   client.println("<a href='http://www.ericklan.com:8080/arduino/3\\'>Turn ON TURBO</a><br>");
+  client.println("<a href='http://www.ericklan.com:8080/arduino/4\\'>Turn OFF TURBO</a><br>");
 
   
   client.print("Command: ");
@@ -83,8 +86,8 @@ void process(YunClient client) {
   // Turn on
   if (inChar == 1)   {
     
-      client.print("Command: ");
-     client.println(command);
+    client.print("Command: ");
+    client.println(command);
     digitalWrite(LED2,HIGH);
 
     digitalWrite(LED3,HIGH);    
@@ -111,8 +114,21 @@ void process(YunClient client) {
 
   }
 
+ //getting the voltage reading from the temperature sensor
+ int reading = analogRead(tempPin);  
+
+ client.println("reading: ");
+ client.println(reading);
 
 
+  float mv = ( reading/1024.0)*5000; 
 
-    delay(500);
+  float cel = mv/10;
+                                               
+ 
+  client.println(" degrees C: ");
+  client.println(cel);
+  Serial.print(cel); Serial.println(" degress C");
+
+ delay(900);
 }
