@@ -18,7 +18,6 @@ float temp;
 
 YunServer server;
 
-
 bool Contains(String s, String search) {
   int max = s.length() - search.length();
 
