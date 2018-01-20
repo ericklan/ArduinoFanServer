@@ -39,8 +39,6 @@ void setup() {
   //digitalWrite(LEDPIN,HIGH); // turn on Led while connecting
   Bridge.begin();
 
-
-
   // server.listenOnLocalhost();
   server.begin();
 
@@ -104,11 +102,7 @@ void CheckTemperature() {
       digitalWrite(LED3, LOW);
       digitalWrite(LED4, LOW);
     }
- 
-
 }
-
-
 
 void process(YunClient client) {
   // Collect user commands
